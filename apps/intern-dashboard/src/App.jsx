@@ -1,13 +1,4 @@
 import { useState } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 const menuItems = [
   { name: "Dashboard", icon: "⌂" },
@@ -101,8 +92,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-
-      {/* MOBILE OVERLAY */}
       {mobileMenu && (
         <div
           onClick={() => setMobileMenu(false)}
@@ -111,23 +100,20 @@ function App() {
       )}
 
       <div className="flex min-h-screen">
-
-        {/* DESKTOP SIDEBAR */}
         <Sidebar
           activePage={activePage}
           changePage={changePage}
         />
 
-        {/* MOBILE SIDEBAR */}
         <div
-          className={`fixed left-0 top-0 z-50 h-full w-72 transform bg-[#111111] transition-transform duration-300 md:hidden ${
-            mobileMenu
+          className={
+            "fixed left-0 top-0 z-50 h-full w-72 bg-[#111111] transition-transform duration-300 md:hidden " +
+            (mobileMenu
               ? "translate-x-0"
-              : "-translate-x-full"
-          }`}
+              : "-translate-x-full")
+          }
         >
           <div className="flex h-full flex-col p-5">
-
             <div className="mb-8 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold">
@@ -152,11 +138,12 @@ function App() {
                 <button
                   key={item.name}
                   onClick={() => changePage(item.name)}
-                  className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                    activePage === item.name
+                  className={
+                    "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition " +
+                    (activePage === item.name
                       ? "bg-blue-600 text-white"
-                      : "text-gray-400 hover:bg-gray-800 hover:text-white"
-                  }`}
+                      : "text-gray-400 hover:bg-gray-800 hover:text-white")
+                  }
                 >
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-black/20">
                     {item.icon}
@@ -180,21 +167,13 @@ function App() {
                 <div className="h-full w-[75%] rounded-full bg-blue-600" />
               </div>
             </div>
-
           </div>
         </div>
 
-        {/* MAIN */}
         <main className="min-w-0 flex-1">
-
-          {/* HEADER */}
           <header className="border-b border-gray-800 bg-[#0d0d0d] px-4 py-4 sm:px-6 lg:px-8">
-
             <div className="flex items-center justify-between">
-
               <div className="flex items-center gap-3">
-
-                {/* MOBILE MENU BUTTON */}
                 <button
                   onClick={() => setMobileMenu(true)}
                   className="rounded-lg border border-gray-800 px-3 py-2 text-xl md:hidden"
@@ -211,12 +190,9 @@ function App() {
                     {activePage}
                   </h1>
                 </div>
-
               </div>
 
-              {/* PROFILE */}
               <div className="flex items-center gap-3">
-
                 <div className="hidden text-right sm:block">
                   <p className="text-sm font-semibold">
                     Tayyeba Tariq
@@ -230,15 +206,11 @@ function App() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold">
                   TT
                 </div>
-
               </div>
-
             </div>
           </header>
 
-          {/* CONTENT */}
           <section className="p-4 sm:p-6 lg:p-8">
-
             {activePage === "Dashboard" && (
               <Dashboard
                 completedTasks={completedTasks}
@@ -258,28 +230,20 @@ function App() {
 
             {activePage === "Progress" && <Progress />}
 
-            {activePage === "Leaderboard" && (
-              <Leaderboard />
-            )}
+            {activePage === "Leaderboard" && <Leaderboard />}
 
             {activePage === "Profile" && <Profile />}
-
           </section>
-
         </main>
       </div>
     </div>
   );
 }
 
-/* ================= SIDEBAR ================= */
-
 function Sidebar({ activePage, changePage }) {
   return (
     <aside className="hidden w-64 shrink-0 border-r border-gray-800 bg-[#111111] md:block">
-
       <div className="sticky top-0 flex h-screen flex-col p-5">
-
         <div className="mb-10">
           <h2 className="text-2xl font-bold">
             Nexariza<span className="text-blue-500">.</span>
@@ -295,11 +259,12 @@ function Sidebar({ activePage, changePage }) {
             <button
               key={item.name}
               onClick={() => changePage(item.name)}
-              className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                activePage === item.name
+              className={
+                "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition " +
+                (activePage === item.name
                   ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                  : "text-gray-400 hover:bg-gray-800 hover:text-white"
-              }`}
+                  : "text-gray-400 hover:bg-gray-800 hover:text-white")
+              }
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-black/20">
                 {item.icon}
@@ -313,7 +278,6 @@ function Sidebar({ activePage, changePage }) {
         </nav>
 
         <div className="mt-auto rounded-xl border border-gray-800 bg-[#0d0d0d] p-4">
-
           <p className="text-xs text-gray-500">
             Internship Program
           </p>
@@ -325,15 +289,11 @@ function Sidebar({ activePage, changePage }) {
           <div className="mt-3 h-2 rounded-full bg-gray-800">
             <div className="h-full w-[75%] rounded-full bg-blue-600" />
           </div>
-
         </div>
-
       </div>
     </aside>
   );
 }
-
-/* ================= DASHBOARD ================= */
 
 function Dashboard({ completedTasks, changePage }) {
   const stats = [
@@ -344,7 +304,6 @@ function Dashboard({ completedTasks, changePage }) {
 
   return (
     <div className="mx-auto max-w-7xl">
-
       <div className="mb-8">
         <p className="text-sm text-gray-500">
           Welcome back 👋
@@ -359,16 +318,13 @@ function Dashboard({ completedTasks, changePage }) {
         </p>
       </div>
 
-      {/* STATS */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
         {stats.map(([title, value, subtitle, icon]) => (
           <div
             key={title}
             className="rounded-2xl border border-gray-800 bg-[#111111] p-6 transition hover:border-blue-600/50"
           >
             <div className="flex items-center justify-between">
-
               <div>
                 <p className="text-sm text-gray-500">
                   {title}
@@ -386,24 +342,18 @@ function Dashboard({ completedTasks, changePage }) {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-xl text-blue-500">
                 {icon}
               </div>
-
             </div>
           </div>
         ))}
-
       </div>
 
-      {/* LOWER CARDS */}
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
-
         <div className="rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
           <h3 className="text-lg font-semibold">
             Quick Actions
           </h3>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-
             <button
               onClick={() => changePage("Tasks")}
               className="rounded-xl bg-blue-600 px-4 py-3 font-medium hover:bg-blue-700"
@@ -417,12 +367,10 @@ function Dashboard({ completedTasks, changePage }) {
             >
               Check Progress
             </button>
-
           </div>
         </div>
 
         <div className="rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
           <p className="text-sm text-gray-500">
             Current Focus
           </p>
@@ -437,7 +385,6 @@ function Dashboard({ completedTasks, changePage }) {
           </p>
 
           <div className="mt-5">
-
             <div className="mb-2 flex justify-between text-xs">
               <span className="text-gray-500">
                 Progress
@@ -451,17 +398,12 @@ function Dashboard({ completedTasks, changePage }) {
             <div className="h-2 rounded-full bg-gray-800">
               <div className="h-full w-[70%] rounded-full bg-blue-600" />
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   );
 }
-
-/* ================= TASKS ================= */
 
 function Tasks({
   tasks,
@@ -472,7 +414,6 @@ function Tasks({
 }) {
   return (
     <div className="mx-auto max-w-5xl">
-
       <div className="mb-8">
         <h2 className="text-2xl font-bold">
           Weekly Tasks
@@ -484,15 +425,12 @@ function Tasks({
       </div>
 
       <div className="space-y-3">
-
         {tasks.map((task) => (
           <div
             key={task.id}
             className="flex flex-col gap-4 rounded-2xl border border-gray-800 bg-[#111111] p-5 sm:flex-row sm:items-center sm:justify-between"
           >
-
             <div className="flex items-start gap-4">
-
               <input
                 type="checkbox"
                 checked={task.status === "Completed"}
@@ -502,11 +440,12 @@ function Tasks({
 
               <div>
                 <h3
-                  className={`font-semibold ${
-                    task.status === "Completed"
+                  className={
+                    "font-semibold " +
+                    (task.status === "Completed"
                       ? "text-gray-500 line-through"
-                      : ""
-                  }`}
+                      : "")
+                  }
                 >
                   {task.title}
                 </h3>
@@ -515,29 +454,25 @@ function Tasks({
                   {task.week}
                 </p>
               </div>
-
             </div>
 
             <span
-              className={`w-fit rounded-full px-3 py-1 text-xs ${
-                task.status === "Completed"
+              className={
+                "w-fit rounded-full px-3 py-1 text-xs " +
+                (task.status === "Completed"
                   ? "bg-green-500/10 text-green-400"
                   : task.status === "In Progress"
                   ? "bg-blue-500/10 text-blue-400"
-                  : "bg-yellow-500/10 text-yellow-400"
-              }`}
+                  : "bg-yellow-500/10 text-yellow-400")
+              }
             >
               {task.status}
             </span>
-
           </div>
         ))}
-
       </div>
 
-      {/* SUBMISSION */}
       <div className="mt-8 rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
         <h3 className="text-lg font-semibold">
           Submit Your Work
         </h3>
@@ -550,7 +485,6 @@ function Tasks({
           onSubmit={submitWork}
           className="mt-5 flex flex-col gap-3 sm:flex-row"
         >
-
           <input
             type="url"
             required
@@ -566,15 +500,11 @@ function Tasks({
           >
             Submit
           </button>
-
         </form>
-
       </div>
     </div>
   );
 }
-
-/* ================= PROGRESS ================= */
 
 function Progress() {
   const timeline = [
@@ -586,7 +516,6 @@ function Progress() {
 
   return (
     <div className="mx-auto max-w-7xl">
-
       <div className="mb-8">
         <h2 className="text-2xl font-bold">
           Progress Timeline
@@ -597,77 +526,53 @@ function Progress() {
         </p>
       </div>
 
-      {/* GRAPH */}
       <div className="rounded-2xl border border-gray-800 bg-[#111111] p-5 sm:p-6">
-
         <h3 className="mb-6 text-lg font-semibold">
           Weekly Progress
         </h3>
 
-        <div className="h-72 w-full">
+        <div className="space-y-6">
+          {progressData.map((item) => (
+            <div key={item.week}>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-medium">
+                  {item.week}
+                </span>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={progressData}>
+                <span className="text-sm text-blue-400">
+                  {item.progress}%
+                </span>
+              </div>
 
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="#222"
-              />
-
-              <XAxis
-                dataKey="week"
-                stroke="#777"
-              />
-
-              <YAxis
-                domain={[0, 100]}
-                stroke="#777"
-              />
-
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#111",
-                  border: "1px solid #333",
-                  borderRadius: "10px",
-                }}
-              />
-
-              <Line
-                type="monotone"
-                dataKey="progress"
-                stroke="#2563eb"
-                strokeWidth={3}
-                dot={{ r: 5 }}
-              />
-
-            </LineChart>
-          </ResponsiveContainer>
-
+              <div className="h-3 w-full rounded-full bg-gray-800">
+                <div
+                  className="h-3 rounded-full bg-blue-600 transition-all"
+                  style={{ width: item.progress + "%" }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* TIMELINE */}
       <div className="mt-6 rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
         <h3 className="text-lg font-semibold">
           Internship Timeline
         </h3>
 
         <div className="mt-6 space-y-6">
-
           {timeline.map(([week, title, status], index) => (
             <div key={week} className="flex gap-4">
-
               <div className="flex flex-col items-center">
-
                 <div
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
-                    status === "Completed"
+                  className={
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-full " +
+                    (status === "Completed"
                       ? "bg-green-500/20 text-green-400"
                       : status === "In Progress"
                       ? "bg-blue-500/20 text-blue-400"
-                      : "bg-gray-800 text-gray-500"
-                  }`}
+                      : "bg-gray-800 text-gray-500")
+                  }
                 >
                   {status === "Completed" ? "✓" : index + 1}
                 </div>
@@ -675,7 +580,6 @@ function Progress() {
                 {index < timeline.length - 1 && (
                   <div className="mt-2 h-12 w-px bg-gray-800" />
                 )}
-
               </div>
 
               <div>
@@ -691,22 +595,17 @@ function Progress() {
                   {status}
                 </p>
               </div>
-
             </div>
           ))}
-
         </div>
       </div>
     </div>
   );
 }
 
-/* ================= LEADERBOARD ================= */
-
 function Leaderboard() {
   return (
     <div className="mx-auto max-w-4xl">
-
       <div className="mb-8">
         <h2 className="text-2xl font-bold">
           Leaderboard
@@ -718,17 +617,16 @@ function Leaderboard() {
       </div>
 
       <div className="space-y-3">
-
         {leaderboard.map((intern) => (
           <div
             key={intern.rank}
-            className={`flex items-center gap-3 rounded-2xl border p-4 sm:gap-4 ${
-              intern.name === "Tayyeba Tariq"
+            className={
+              "flex items-center gap-3 rounded-2xl border p-4 sm:gap-4 " +
+              (intern.name === "Tayyeba Tariq"
                 ? "border-blue-600/50 bg-blue-600/5"
-                : "border-gray-800 bg-[#111111]"
-            }`}
+                : "border-gray-800 bg-[#111111]")
+            }
           >
-
             <div className="w-7 text-center text-sm font-bold text-gray-500">
               #{intern.rank}
             </div>
@@ -738,7 +636,6 @@ function Leaderboard() {
             </div>
 
             <div className="min-w-0 flex-1">
-
               <p className="truncate font-semibold">
                 {intern.name}
               </p>
@@ -748,11 +645,9 @@ function Leaderboard() {
                   You
                 </p>
               )}
-
             </div>
 
             <div className="text-right">
-
               <p className="font-bold">
                 {intern.score}
               </p>
@@ -760,23 +655,17 @@ function Leaderboard() {
               <p className="text-xs text-gray-600">
                 points
               </p>
-
             </div>
-
           </div>
         ))}
-
       </div>
     </div>
   );
 }
 
-/* ================= PROFILE ================= */
-
 function Profile() {
   return (
     <div className="mx-auto max-w-5xl">
-
       <div className="mb-8">
         <h2 className="text-2xl font-bold">
           My Profile
@@ -788,10 +677,7 @@ function Profile() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-
-        {/* PROFILE */}
         <div className="rounded-2xl border border-gray-800 bg-[#111111] p-6 text-center">
-
           <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-blue-600 text-2xl font-bold">
             TT
           </div>
@@ -808,18 +694,14 @@ function Profile() {
             Passionate about web development and learning
             modern technologies through practical projects.
           </p>
-
         </div>
 
-        {/* INFORMATION */}
         <div className="rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
           <h3 className="text-lg font-semibold">
             Intern Information
           </h3>
 
           <div className="mt-5 space-y-4">
-
             <ProfileItem
               label="Domain"
               value="Web Development"
@@ -839,40 +721,29 @@ function Profile() {
               label="Status"
               value="Active"
             />
-
           </div>
-
         </div>
 
-        {/* GITHUB */}
         <div className="rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
           <h3 className="text-lg font-semibold">
             GitHub Stats
           </h3>
 
           <div className="mt-5 grid grid-cols-2 gap-3">
-
             <StatBox value="12" label="Repositories" />
             <StatBox value="48" label="Commits" />
             <StatBox value="6" label="Projects" />
             <StatBox value="24" label="Followers" />
-
           </div>
-
         </div>
-
       </div>
 
-      {/* SOCIAL LINKS */}
       <div className="mt-6 rounded-2xl border border-gray-800 bg-[#111111] p-6">
-
         <h3 className="text-lg font-semibold">
           Social Links
         </h3>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
-
           <a
             href="https://github.com/"
             target="_blank"
@@ -897,15 +768,11 @@ function Profile() {
           >
             Email
           </a>
-
         </div>
       </div>
-
     </div>
   );
 }
-
-/* ================= SMALL COMPONENTS ================= */
 
 function ProfileItem({ label, value }) {
   return (
@@ -936,3 +803,4 @@ function StatBox({ value, label }) {
 }
 
 export default App;
+
